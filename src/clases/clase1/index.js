@@ -64,17 +64,17 @@ const pasos = [
     mas: `<p>Los laboratorios se trabajan en el repositorio de GitHub de cada estudiante y se entregan en Moodle con la URL del repositorio. Las soluciones de cada laboratorio se publican después de su fecha de entrega.</p>` },
 
   // ---- Introducción
-  { seccion: "introduccion", escena: "historia", cam: [-6, 14, 42], mira: [0, 6, 0],
+  { seccion: "introduccion", escena: "historia", cam: [-8, 18, 62], mira: [0, 6, 0],
     ojo: "Introducción", t: "¿Por qué fallan los proyectos de IA?",
     html: `<p>¿Qué pasa cuando una organización despliega un modelo avanzado de IA, pero los resultados cambian en cada ejecución porque <b>nadie sabe de dónde vienen los datos</b> ni quién debe prepararlos?</p>`,
     mas: `<p>La respuesta casi nunca está en la falta de talento técnico, sino en la falta de claridad sobre dónde termina la responsabilidad de un rol y dónde empieza la del siguiente.</p>` },
-  { seccion: "introduccion", escena: "historia", cam: [22, 18, 48], mira: [6, 6, 0],
+  { seccion: "introduccion", escena: "historia", cam: [26, 22, 68], mira: [4, 6, 0],
     ojo: "Introducción", t: "Una historia de comercio electrónico",
     html: `<ul><li>La empresa lanza una función de <b>recomendación de productos</b> para vender más.</li><li>Semanas después, el modelo sugiere productos erróneos.</li>
     <li>Los tableros de la gerencia muestran <b>cifras contradictorias</b> de ingresos.</li><li>Ingenieros y analistas <b>se culpan</b> entre sí.</li></ul>
     <p>Mira el pipeline: tiene huecos entre tramos, y por ahí se escapan los datos.</p>`,
     mas: `<p>Es una historia ficticia, pero muy común en la industria. La retomamos al final de la clase para ver cómo se resuelve.</p>` },
-  { seccion: "introduccion", escena: "historia", cam: [0, 30, 64], mira: [0, 6, 0],
+  { seccion: "introduccion", escena: "historia", cam: [0, 34, 84], mira: [0, 6, 0],
     ojo: "Introducción", t: "Al final de esta clase podrán",
     html: `<ul><li>Diferenciar los <b>nueve roles</b> de Data & AI y sus traspasos de trabajo.</li><li>Explicar las <b>herramientas</b> del curso y por qué se protegen los tokens.</li>
     <li>Definir qué es un <b>pipeline</b> y por qué la IA depende de él.</li><li>Describir la <b>infraestructura moderna</b> y la diversidad de las fuentes.</li>
@@ -87,47 +87,47 @@ const pasos = [
     html: `<ul><li>Muchas empresas dicen estar guiadas por datos, pero <b>deciden lento y por intuición</b>.</li><li>La causa: las brechas en los traspasos de trabajo (<i>handoff gaps</i>).</li>
     <li>La organización moderna se estructura en <b>nueve roles</b> con responsabilidades claras.</li><li>Cada flecha es un traspaso: lo que un rol entrega y otro recibe.</li></ul><p class="fuente">Curry (2025)</p>`,
     mas: `<p>Los roles no forman una sola fila: varios trabajan en paralelo sobre lo que entrega el mismo rol.</p>` },
-  { seccion: "roles", escena: "roles", foco: "DE", cam: [-20, 14, 20], mira: [-26, 5, 0],
+  { seccion: "roles", escena: "roles", foco: "DE", cam: [-17.9, 20.1, 27], mira: [-26, 8, 0],
     ojo: "Rol 1 de 9", t: "Data Engineer",
     html: `<ul><li><b>Dueño</b> de la ingesta, los pipelines y la confiabilidad de la plataforma.</li><li><b>Misión:</b> que los datos estén limpios, bien modelados y disponibles.</li>
     <li><b>Herramientas:</b> Snowflake, Databricks, Airflow, Kafka, Spark, Python y SQL.</li><li><b>Entrega:</b> tablas estructuradas, listas para usarse.</li></ul>`,
     mas: `<p>Fíjate en las flechas: entrega en paralelo al Analytics Engineer, al Data Scientist y al AI Engineer. Curry (2025); Densmore (2021, cap. 1).</p>` },
-  { seccion: "roles", escena: "roles", foco: "AE", cam: [-2, 14, 6], mira: [-8, 5, -12],
+  { seccion: "roles", escena: "roles", foco: "AE", cam: [0.1, 20.1, 12.3], mira: [-8, 8, -12],
     ojo: "Rol 2 de 9", t: "Analytics Engineer",
     html: `<ul><li>Un <b>desarrollador de software</b> para datos analíticos.</li><li><b>Misión:</b> convertir datos crudos en conjuntos listos para el negocio.</li>
     <li>Define <b>métricas únicas</b> y construye la capa semántica.</li><li><b>Herramientas:</b> dbt, SQL, Git, warehouses analíticos.</li><li><b>Entrega:</b> modelos dimensionales y métricas unificadas.</li></ul>`,
     mas: `<p>Sus métricas alimentan a la vez al BI Developer, al Data Analyst y al Data Scientist (Curry, 2025).</p>` },
-  { seccion: "roles", escena: "roles", foco: "BI", cam: [16, 14, -2], mira: [10, 5, -20],
+  { seccion: "roles", escena: "roles", foco: "BI", cam: [18.1, 20.1, 4.3], mira: [10, 8, -20],
     ojo: "Rol 3 de 9", t: "BI Developer",
     html: `<ul><li>Diseña la <b>interfaz visual</b> que consume la empresa.</li><li>Construye tableros, cuida la usabilidad y facilita el <b>autoservicio</b>.</li>
     <li><b>Herramientas:</b> Power BI, Tableau, Looker.</li><li><b>Entrega:</b> visualizaciones de los indicadores clave.</li></ul>`,
     mas: `<p>Curry (2025).</p>` },
-  { seccion: "roles", escena: "roles", foco: "DA", cam: [18, 14, 10], mira: [12, 5, -7],
+  { seccion: "roles", escena: "roles", foco: "DA", cam: [20.1, 20.1, 16], mira: [12, 8, -7],
     ojo: "Rol 4 de 9", t: "Data Analyst",
     html: `<ul><li>Convierte los datos en <b>explicaciones e ideas</b> de negocio.</li><li><b>Misión:</b> responder por qué pasó algo y qué decisión tomar.</li>
     <li><b>Herramientas:</b> SQL, Python, Excel.</li><li><b>Entrega:</b> diagnósticos y recomendaciones estratégicas.</li></ul>`,
     mas: `<p>Curry (2025); Densmore (2021, cap. 1).</p>` },
-  { seccion: "roles", escena: "roles", foco: "DS", cam: [0, 14, 22], mira: [-6, 5, 4],
+  { seccion: "roles", escena: "roles", foco: "DS", cam: [2.1, 20.1, 28.3], mira: [-6, 8, 4],
     ojo: "Rol 5 de 9", t: "Data Scientist",
     html: `<ul><li>Aporta <b>predicción, optimización y experimentación</b>.</li><li><b>Misión:</b> modelos causales o predictivos que influyan en el comportamiento del usuario.</li>
     <li><b>Herramientas:</b> Python, scikit-learn, PyTorch, TensorFlow.</li><li><b>Entrega:</b> modelos y estimaciones de impacto.</li></ul>`,
     mas: `<p>Recibe datos del Data Engineer y métricas del Analytics Engineer, y entrega sus modelos al AI Engineer y a MLOps (Curry, 2025; Densmore, 2021, cap. 1).</p>` },
-  { seccion: "roles", escena: "roles", foco: "AI", cam: [0, 14, 36], mira: [-6, 5, 18],
+  { seccion: "roles", escena: "roles", foco: "AI", cam: [2.1, 20.1, 42.3], mira: [-6, 8, 18],
     ojo: "Rol 6 de 9", t: "AI / LLM Engineer",
     html: `<ul><li>Construye y despliega aplicaciones con <b>LLMs, agentes</b> y flujos automatizados.</li><li><b>Herramientas:</b> LangChain, LlamaIndex, bases de datos vectoriales, APIs de IA.</li>
     <li><b>Entrega:</b> funcionalidades y <i>endpoints</i> inteligentes.</li><li>También <b>trabaja directamente con los datos</b>: la flecha de vuelta hacia el Data Engineer.</li></ul>`,
     mas: `<p>Convierte las predicciones en acciones (Curry, 2025).</p>` },
-  { seccion: "roles", escena: "roles", foco: "PE", cam: [18, 14, 38], mira: [12, 5, 24],
+  { seccion: "roles", escena: "roles", foco: "PE", cam: [20.1, 20.1, 42.9], mira: [12, 8, 24],
     ojo: "Rol 7 de 9", t: "Prompt Engineer",
     html: `<ul><li>Diseña y optimiza las <b>instrucciones</b> que reciben los modelos.</li><li>Busca respuestas precisas, fiables y alineadas con la marca.</li>
     <li><b>Herramientas:</b> marcos de evaluación de LLMs y búsqueda vectorial.</li><li><b>Entrega:</b> marcos de interacción y patrones de comportamiento.</li></ul>`,
     mas: `<p>Trabaja codo a codo con el AI Engineer (Curry, 2025).</p>` },
-  { seccion: "roles", escena: "roles", foco: "ML", cam: [24, 14, 24], mira: [16, 5, 10],
+  { seccion: "roles", escena: "roles", foco: "ML", cam: [26.8, 20.1, 28.9], mira: [16, 8, 10],
     ojo: "Rol 8 de 9", t: "MLOps / DevOps Engineer",
     html: `<ul><li>Convierte los prototipos en <b>sistemas en producción</b> que escalan.</li><li>Despliegue, monitoreo de degradación, reentrenamiento e integración continua.</li>
     <li><b>Herramientas:</b> Docker, Kubernetes, MLflow, GitHub Actions.</li><li><b>Entrega:</b> infraestructura confiable y automatizada.</li></ul>`,
     mas: `<p>Recibe los modelos del Data Scientist y las aplicaciones del AI Engineer (Curry, 2025).</p>` },
-  { seccion: "roles", escena: "roles", foco: "PM", cam: [-4, 30, 22], mira: [-4, 16, 2],
+  { seccion: "roles", escena: "roles", foco: "PM", cam: [-4, 37.9, 29], mira: [-4, 19, 2],
     ojo: "Rol 9 de 9", t: "Product Manager (Data & AI)",
     html: `<ul><li>Lidera la <b>priorización estratégica</b> y la alineación con el negocio.</li><li>Asegura que el equipo construya <b>soluciones útiles</b>, no solo experimentos interesantes.</li>
     <li>Se conecta con todos los roles, no es un eslabón más de la cadena.</li></ul>`,
@@ -184,52 +184,52 @@ const pasos = [
     mas: `<p>Los mismos datos que en JSON, reorganizados: ahora cada color, cada campo, queda junto.</p>` },
 
   // ---- ¿Qué es un pipeline de datos?
-  { seccion: "pipeline", escena: "iceberg", cam: [34, 22, 46], mira: [0, 4, 0], etapa: -1,
+  { seccion: "pipeline", escena: "iceberg", cam: [40.1, 25.2, 54.3], mira: [0, 4, 0], etapa: -1,
     ojo: "Fundamentos · El pipeline de datos", t: "¿Qué es un pipeline de datos?",
     html: `<p>Un pipeline es un <b>conjunto de procesos que mueven y transforman datos</b> desde diversas fuentes hacia un destino donde se puede extraer nuevo valor de ellos.</p>
     <p>Sin esa maquinaria, los datos se quedan aislados, sin contexto y sin utilidad para tomar decisiones.</p><p class="fuente">Densmore (2021), cap. 1</p>`,
     mas: `<p>Detrás de cada tablero que impresiona a la gerencia y de cada modelo que anticipa el comportamiento de un usuario hay una maquinaria invisible pero fundamental: el pipeline de datos.</p>` },
-  { seccion: "pipeline", escena: "iceberg", marca: "punta", cam: [10, 15, 26], mira: [0, 11, 0], etapa: 5,
+  { seccion: "pipeline", escena: "iceberg", marca: "punta", cam: [11.8, 15.7, 30.7], mira: [0, 11, 0], etapa: 5,
     ojo: "El iceberg analítico", t: "Lo que todos ven",
     html: `<p>La mayoría de las personas en una empresa solo ven la punta que sobresale del agua:</p>
     <ul><li><b>Tableros de BI</b>: métricas e informes para decidir.</li><li><b>Aplicaciones con LLM</b>: herramientas de IA generativa.</li><li><b>Modelos predictivos</b>: proyectan tendencias futuras.</li></ul>`,
     mas: `<p>Densmore (2021, cap. 1) usa la imagen del iceberg: tableros interactivos, gráficos y predicciones automáticas son solo la parte visible del trabajo con datos.</p>` },
-  { seccion: "pipeline", escena: "iceberg", cam: [42, 0.6, 30], mira: [0, -14, 0], etapa: -1,
+  { seccion: "pipeline", escena: "iceberg", cam: [49.6, 3.2, 35.4], mira: [0, -14, 0], etapa: -1,
     ojo: "El iceberg analítico", t: "Lo que no se ve",
     html: `<p>Bajo el agua está la <b>masa sumergida</b>: por cada tablero o modelo en producción hay pipelines trabajando en silencio para</p>
     <ul><li>extraer datos de muchos sistemas,</li><li>limpiarlos y estructurarlos,</li><li>combinarlos y protegerlos.</li></ul><p>Cada etapa del recorrido agrega un poco más de orden y calidad.</p>`,
     mas: `<p>Vamos a bajar al fondo y subir por el pipeline, etapa por etapa, hasta volver a la superficie.</p>` },
-  { seccion: "pipeline", escena: "iceberg", marca: "origen", cam: [20, -44, 34], mira: [0, -50, 6], etapa: 0,
+  { seccion: "pipeline", escena: "iceberg", marca: "origen", cam: [23.6, -42.9, 39], mira: [0, -50, 6], etapa: 0,
     ojo: "Etapa 1 de 6", t: "Origen",
     html: `<p>Los datos viven en lugares muy distintos: <b>APIs web</b>, <b>bases de datos</b> o <b>archivos</b> guardados en la nube.</p><p>En este curso, el origen es la API de datasets de Hugging Face: tweets en español etiquetados por sentimiento.</p>`,
     mas: `<p>Cada fuente tiene su propia interfaz, estructura, volumen y nivel de limpieza. Lo veremos en detalle en «Fuentes de datos».</p>` },
-  { seccion: "pipeline", escena: "iceberg", cam: [26, -34, 30], mira: [2, -38, 6], etapa: 1,
+  { seccion: "pipeline", escena: "iceberg", cam: [30.3, -33.3, 34.3], mira: [2, -38, 6], etapa: 1,
     ojo: "Etapa 2 de 6", t: "Ingesta",
     html: `<p>El pipeline <b>se conecta a las fuentes</b> y traslada la información cruda a un repositorio central.</p><p>En el Laboratorio 1 lo hacen desde Colab: piden los tweets a la API página por página y los suben a Databricks.</p>`,
     mas: `<p>Las partículas grises del tubo son registros con problemas: duplicados, nulos o formatos rotos. Por ahora viajan junto a los buenos.</p>` },
-  { seccion: "pipeline", escena: "iceberg", cam: [-26, -22, 30], mira: [-4, -26, 6], etapa: 2,
+  { seccion: "pipeline", escena: "iceberg", cam: [-30, -21.3, 34.3], mira: [-4, -26, 6], etapa: 2,
     ojo: "Etapa 3 de 6", t: "Almacenamiento",
     html: `<p>Los datos se guardan primero <b>tal como llegaron</b>, sin cambios.</p><p>Así queda un historial que permite auditar o volver a procesar si algo sale mal.</p>`,
     mas: `<p>En Databricks esta es la <b>capa bronce</b> de la arquitectura medallion: la tabla <code>bronze_tweets</code> del Laboratorio 1.</p>` },
-  { seccion: "pipeline", escena: "iceberg", cam: [26, -12, 28], mira: [4, -14, 6], etapa: 3,
+  { seccion: "pipeline", escena: "iceberg", cam: [30, -11.6, 32], mira: [4, -14, 6], etapa: 3,
     ojo: "Etapa 4 de 6", t: "Limpieza",
     html: `<p>El pipeline revisa los registros:</p><ul><li>elimina <b>duplicados</b>,</li><li>maneja <b>valores nulos</b>,</li><li>corrige <b>formatos inconsistentes</b>,</li><li>aplica <b>reglas de validación</b>.</li></ul><p>Mira el anillo: las partículas grises no pasan.</p>`,
     mas: `<p>Corresponde a la <b>capa plata</b>. En la Clase 3 la construirán con SQL: deduplicación con <code>ROW_NUMBER()</code> y limpieza del texto, conservando siempre el dato original.</p>` },
-  { seccion: "pipeline", escena: "iceberg", cam: [-24, -1, 26], mira: [-3, -3, 4], etapa: 4,
+  { seccion: "pipeline", escena: "iceberg", cam: [-27.8, -0.6, 30], mira: [-3, -3, 4], etapa: 4,
     ojo: "Etapa 5 de 6", t: "Modelado",
     html: `<p>Los datos limpios <b>se combinan y se adaptan</b> a lo que necesita el negocio o el modelo de inteligencia artificial.</p>`,
     mas: `<p>Es la <b>capa oro</b>: en el curso, el dataset limpio y etiquetado con el que entrenarán un clasificador de sentimiento.</p>` },
-  { seccion: "pipeline", escena: "iceberg", marca: "consumo", cam: [14, 16, 24], mira: [0, 11, 0], etapa: 5,
+  { seccion: "pipeline", escena: "iceberg", marca: "consumo", cam: [16.5, 16.9, 28.3], mira: [0, 11, 0], etapa: 5,
     ojo: "Etapa 6 de 6", t: "Consumo",
     html: `<p>El resultado <b>alimenta los tableros de control y los modelos de machine learning</b>.</p><p>Volvimos a la superficie: la punta del iceberg solo existe porque todo lo de abajo funciona.</p>`,
     mas: `<p>Estas etapas se organizan en capas llamadas bronce, plata y oro (Databricks, arquitectura medallion). Lo veremos en la sección de almacenamiento.</p>` },
-  { seccion: "pipeline", escena: "iceberg", marca: "basura", cam: [18, 9, 30], mira: [0, 4, 0], etapa: -1,
+  { seccion: "pipeline", escena: "iceberg", marca: "basura", cam: [21.2, 9.9, 35.4], mira: [0, 4, 0], etapa: -1,
     ojo: "Por qué la IA depende del pipeline", t: "Basura entra, basura sale",
     html: `<p>Si el pipeline deja pasar información defectuosa, <b>los tableros muestran indicadores falsos</b> y los modelos aprenden patrones que no existen.</p>
     <p>Apagamos el filtro de limpieza: mira cómo llegan los datos grises a la superficie.</p>
     <p>Cuando el trabajo se hace a mano aparecen tres riesgos:</p><ul><li>datos desactualizados,</li><li>varias versiones contradictorias de la verdad,</li><li>talento analítico desperdiciado en tareas repetitivas.</li></ul>`,
     mas: `<p>«Garbage in, garbage out» (Densmore, 2021, cap. 2). Como señala Curry (2025), los proyectos de analítica e IA no suelen fallar por falta de talento técnico, sino por las brechas en los traspasos de trabajo entre roles.</p>` },
-  { seccion: "pipeline", escena: "iceberg", cam: [-30, 6, 40], mira: [0, -6, 0], etapa: -1,
+  { seccion: "pipeline", escena: "iceberg", cam: [-44, 12, 58], mira: [0, -3, 0], etapa: -1,
     ojo: "Ejemplo", t: "La cocina de un restaurante",
     html: `<ul><li><b>Ingredientes</b> (datos crudos) llegan de distintos <b>proveedores</b> (fuentes) y se guardan en la bodega.</li>
     <li>Nadie cocina verduras con tierra: en la <b>estación de preparación</b> se lavan, se pelan y se descartan las dañadas.</li>
@@ -381,19 +381,19 @@ const pasos = [
     mas: `<p>Lo usaremos en la Clase 7 para automatizar el paso de bronce a plata y de plata a oro.</p>` },
 
   // ---- Resumen
-  { seccion: "resumen", escena: "historia", reparado: true, cam: [22, 18, 48], mira: [6, 6, 0],
+  { seccion: "resumen", escena: "historia", reparado: true, cam: [26, 22, 68], mira: [4, 6, 0],
     ojo: "Resumen", t: "Volvamos a la empresa",
     html: `<p>Ahora sabemos qué salió mal:</p><ul><li>no había pipelines orquestados con <b>DAGs</b>,</li><li>los datos se mezclaban sin pasar por <b>bronce, plata y oro</b>,</li>
     <li>las <b>credenciales</b> estaban expuestas,</li><li>nadie sabía qué <b>rol</b> respondía por la calidad.</li></ul>
     <p>Con roles claros, pipelines sólidos y orquestación, el pipeline se cierra y los datos llegan confiables.</p>`,
     mas: `<p>Curry (2025).</p>` },
-  { seccion: "resumen", escena: "historia", reparado: true, cam: [0, 30, 64], mira: [0, 6, 0],
+  { seccion: "resumen", escena: "historia", reparado: true, cam: [0, 34, 84], mira: [0, 6, 0],
     ojo: "Resumen", t: "Puntos clave",
     html: `<ul><li>El éxito en datos e IA depende de <b>eliminar las brechas</b> en los traspasos.</li><li>Herramientas modernas y <b>secretos protegidos</b>.</li>
     <li>Los pipelines son la <b>masa sumergida</b> del iceberg.</li><li>Las fuentes varían en interfaz, volumen y estructura: hay que prever los <b>datos sucios</b>.</li>
     <li>El lakehouse ordena los datos en <b>bronce, plata y oro</b>.</li><li>Los <b>DAGs</b> orquestan dependencias sin bucles infinitos.</li></ul>`,
     mas: `<p>Curry (2025); Densmore (2021, caps. 1 y 2); Databricks, arquitectura medallion.</p>` },
-  { seccion: "resumen", escena: "historia", reparado: true, cam: [0, 30, 64], mira: [0, 6, 0],
+  { seccion: "resumen", escena: "historia", reparado: true, cam: [0, 34, 84], mira: [0, 6, 0],
     ojo: "Fuentes", t: "Para profundizar",
     html: `<ul><li><b>Curry (2025).</b> <i>The Modern Data & AI Organization</i>: roles y traspasos.</li><li><b>Densmore (2021).</b> <i>Data Pipelines Pocket Reference</i>, caps. 1 y 2: pipelines, infraestructura, fuentes, almacenamiento y DAG.</li>
     <li><b>Databricks.</b> Arquitectura medallion y Free Edition.</li><li><b>Documentación oficial:</b> Google Colab FAQ, GitHub Docs y Hugging Face Hub docs.</li></ul>`,

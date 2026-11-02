@@ -31,14 +31,26 @@ export class Etiquetas {
   }
   proyectar(camara, estado, limite = innerWidth) {
     const w = innerWidth, h = innerHeight;
+    const arriba = 78, abajo = h - 44; // zona libre entre la barra superior y la pista inferior
     for (const e of this.lista) {
       if (!e.visible(estado)) { e.el.hidden = true; continue; }
+      // Si el objeto mismo queda fuera de la zona visible (o detrás del panel), su etiqueta no se muestra.
+      e.objeto.getWorldPosition(this.v).project(camara);
+      const ox = (this.v.x * 0.5 + 0.5) * w, oy = (-this.v.y * 0.5 + 0.5) * h;
+      if (this.v.z >= 1 || ox < -20 || ox > limite + 20 || oy < 0 || oy > h) { e.el.hidden = true; continue; }
       e.objeto.getWorldPosition(this.v);
       this.v.add(e.desfase).project(camara);
-      const x = (this.v.x * 0.5 + 0.5) * w;
-      // No se dibujan etiquetas detrás del panel de contenido.
-      e.el.hidden = this.v.z >= 1 || x > limite;
-      e.el.style.transform = `translate(${x}px, ${(-this.v.y * 0.5 + 0.5) * h}px) translate(-50%, -50%)`;
+      let x = (this.v.x * 0.5 + 0.5) * w, y = (-this.v.y * 0.5 + 0.5) * h;
+      e.el.hidden = false;
+      if (!e.ancho) { e.ancho = e.el.offsetWidth; e.alto = e.el.offsetHeight; }
+      // Se mantiene dentro de la zona libre: nunca cortada por los bordes ni por el panel.
+      const mx = e.ancho / 2 + 10, my = e.alto / 2 + 4;
+      const cx = Math.min(Math.max(x, mx), Math.max(mx, limite - mx));
+      const cy = Math.min(Math.max(y, arriba + my), abajo - my);
+      // Un desborde pequeño se corrige; uno grande (objeto lejos del encuadre) oculta la etiqueta, salvo la que está en foco.
+      if (Math.hypot(cx - x, cy - y) > 140 && !e.el.classList.contains("activa")) { e.el.hidden = true; continue; }
+      x = cx; y = cy;
+      e.el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
     }
   }
   ocultarTodas() { this.lista.forEach((e) => (e.el.hidden = true)); }
