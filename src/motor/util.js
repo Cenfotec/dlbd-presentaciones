@@ -101,6 +101,7 @@ export function estadoBloque(b, estado) {
   const c = estado === "foco" ? COL.verde : estado === "tenue" ? COL.marino : COL.celeste;
   linea.material.color.set(c);
   malla.material.emissiveIntensity = estado === "foco" ? 0.6 : estado === "tenue" ? 0.12 : 0.3;
+  if (b.userData.icono) estadoIcono(b.userData.icono, estado);
 }
 
 /** Curva suave entre dos puntos, levantada en el medio. */
@@ -147,4 +148,60 @@ export function flujo(curvas, porCurva = 40, color = COL.celeste, tam = 0.45) {
       geo.attributes.color.needsUpdate = true;
     }
   };
+}
+
+/* ---------- Íconos: SVG rasterizado a textura, teñido según el estado ---------- */
+const texturas = new Map();
+function texturaIcono(svg) {
+  if (texturas.has(svg)) return texturas.get(svg);
+  const lienzo = document.createElement("canvas");
+  lienzo.width = lienzo.height = 256;
+  const tex = new THREE.CanvasTexture(lienzo);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 4;
+  const img = new Image();
+  img.onload = () => { lienzo.getContext("2d").drawImage(img, 20, 20, 216, 216); tex.needsUpdate = true; };
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  texturas.set(svg, tex);
+  return tex;
+}
+/** Logotipo de una herramienta (simple-icons), en blanco para teñirlo. */
+export const marca = (si) => `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 24 24"><path fill="#fff" d="${si.path}"/></svg>`;
+/** Ícono de línea (lucide), en blanco y con trazo fino. */
+export const linea = (svg) => svg.replace(/currentColor/g, "#fff").replace(/width="24"/, 'width="256"').replace(/height="24"/, 'height="256"').replace(/stroke-width="2"/, 'stroke-width="1.6"');
+
+const TINTE = { foco: COL.verde, normal: COL.celeste, tenue: 0x41639c };
+export function estadoIcono(ic, estado) {
+  ic.material.color.set(TINTE[estado] || TINTE.normal);
+  ic.userData.base = estado === "tenue" ? 0.55 : 1;
+  ic.material.opacity = ic.userData.base;
+}
+/** Desvanece los íconos que quedan casi pegados a la cámara, para que no tapen la escena. */
+const _p = new THREE.Vector3();
+export function atenuarCercanos(iconos, camara, cerca = 12, rango = 8) {
+  for (const ic of iconos) {
+    const d = camara.position.distanceTo(ic.getWorldPosition(_p));
+    ic.material.opacity = (ic.userData.base ?? 1) * Math.min(1, Math.max(0, (d - cerca) / rango));
+  }
+}
+
+/**
+ * Pone un ícono sobre un objeto. Por defecto flota encima (siempre de frente a la cámara)
+ * y sube su etiqueta; con `placa: true` queda pegado a la cara frontal del objeto.
+ * Si el objeto o su primera parte es un bloque, `estadoBloque` también lo tiñe.
+ */
+export function conIcono(obj, svg, { tam = 2.6, y = null, z = 0, placa = false, subir = true } = {}) {
+  const mat = (placa ? THREE.MeshBasicMaterial : THREE.SpriteMaterial);
+  const material = new mat({ map: texturaIcono(svg), color: COL.celeste, transparent: true, depthWrite: false });
+  const ic = placa ? new THREE.Mesh(new THREE.PlaneGeometry(tam, tam), material) : new THREE.Sprite(material);
+  if (!placa) ic.scale.set(tam, tam, 1);
+  const e = obj.userData.e;
+  const base = y !== null ? y : e ? e.desfase.y + tam / 2 - 0.4 : 0;
+  ic.position.set(0, base, z);
+  obj.add(ic);
+  if (e && subir && !placa && y === null) e.desfase.y = base + tam / 2 + 1.1;
+  const destino = (obj.userData.partes && obj.userData.partes[0]) || obj;
+  destino.userData.icono = ic;
+  obj.userData.icono = ic;
+  return ic;
 }

@@ -354,12 +354,12 @@ const pasos = [
     mas: `<p>En el curso: el dataset con el que entrenarán el clasificador.</p>` },
 
   // ---- DAG
-  { seccion: "dag", escena: "dag", cam: [2, 24, 42], mira: [2, 5, 0],
+  { seccion: "dag", escena: "dag", cam: [2, 30, 56], mira: [2, 5, 0],
     ojo: "Orquestación", t: "¿Quién decide el orden?",
     html: `<p>Decenas de tareas: extraer de MySQL, consumir una API, limpiar JSON en plata, agregar en oro.</p>
     <p>¿Cómo garantizamos que la transformación <b>no empiece antes</b> de que termine la extracción?</p>`,
     mas: `<p>Densmore (2021, cap. 2).</p>` },
-  { seccion: "dag", escena: "dag", foco: "orquestacion", cam: [2, 24, 42], mira: [2, 5, 0],
+  { seccion: "dag", escena: "dag", foco: "orquestacion", cam: [2, 30, 56], mira: [2, 5, 0],
     ojo: "Orquestación", t: "Orquestar flujos de trabajo",
     html: `<ul><li><b>Programa, coordina y monitorea</b> la ejecución ordenada de todas las tareas.</li><li>Respeta las <b>dependencias</b> entre ellas.</li>
     <li>Las tareas que no dependen entre sí corren <b>en paralelo</b>: mira cómo arrancan juntas las dos extracciones.</li></ul><p class="fuente">Densmore (2021), cap. 2</p>`,
@@ -374,7 +374,7 @@ const pasos = [
     html: `<ul><li>El flujo <b>no tiene bucles</b>.</li><li>Una tarea completada nunca apunta de regreso a una anterior en la misma ejecución.</li>
     <li>Con un ciclo, la ejecución quedaría atrapada en un <b>bucle eterno</b> y el pipeline nunca terminaría.</li></ul>`,
     mas: `<p>La flecha que parpadea, de oro de vuelta a la extracción, es justo lo que un DAG no permite (Densmore, 2021, cap. 2).</p>` },
-  { seccion: "dag", escena: "dag", foco: "lakeflow", cam: [2, 26, 46], mira: [2, 5, 0],
+  { seccion: "dag", escena: "dag", foco: "lakeflow", cam: [2, 34, 64], mira: [2, 5, 0],
     ojo: "Orquestación en el curso", t: "Estructura, no lógica: Lakeflow Jobs",
     html: `<ul><li>El DAG describe <b>dependencias y orden</b>, no el código de cada tarea.</li><li>Cada tarea puede ser un script de Python, una consulta SQL o una ejecución en la nube.</li>
     <li><b>En el curso:</b> Lakeflow Jobs define, programa y orquesta las tareas en Databricks de forma visual.</li></ul><p class="fuente">Densmore (2021), cap. 2; Databricks Free Edition docs</p>`,

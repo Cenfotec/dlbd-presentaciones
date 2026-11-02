@@ -1,6 +1,21 @@
 import * as THREE from "three";
 import gsap from "gsap";
-import { COL, escenaBase, bloque, estadoBloque, curvaEntre, tubo, flujo, contorno, reducido } from "../../motor/util.js";
+import { COL, escenaBase, bloque, estadoBloque, curvaEntre, tubo, flujo, contorno, reducido, conIcono, marca, linea, atenuarCercanos } from "../../motor/util.js";
+import { siGithub, siDatabricks, siGooglecolab, siHuggingface, siApachekafka, siMysql, siApacheparquet } from "simple-icons";
+import * as L from "lucide-static";
+
+// Un ícono por componente, para que cada pieza se reconozca de un vistazo.
+const I = {
+  github: marca(siGithub), databricks: marca(siDatabricks), colab: marca(siGooglecolab), hf: marca(siHuggingface),
+  kafka: marca(siApachekafka), mysql: marca(siMysql), parquet: marca(siApacheparquet),
+  api: linea(L.Webhook), bd: linea(L.Database), capas: linea(L.Layers), tablero: linea(L.LayoutDashboard),
+  analisis: linea(L.ChartNoAxesCombined), ciencia: linea(L.FlaskConical), ia: linea(L.BrainCircuit),
+  prompt: linea(L.MessageSquareText), ops: linea(L.Infinity), producto: linea(L.Target), json: linea(L.Braces),
+  equipos: linea(L.Users), error: linea(L.ThumbsDown), alerta: linea(L.TriangleAlert), ingesta: linea(L.ArrowDownToLine),
+  almacen: linea(L.Warehouse), planta: linea(L.Cog), consumo: linea(L.ChartColumn), flujo: linea(L.Workflow),
+  archivos: linea(L.FileText), lago: linea(L.Waves), casa: linea(L.House), crudo: linea(L.Archive),
+  limpio: linea(L.Filter), oro: linea(L.Gem), fuente: linea(L.Mountain)
+};
 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const DUR = reducido ? 0.01 : 1;
@@ -22,11 +37,12 @@ export function crearHistoria(etiquetas) {
   escena.add(entero);
 
   // Los tres síntomas de la historia
-  const sintomas = [["Recomendaciones erróneas", V(30, 10, -8)], ["Cifras contradictorias", V(30, 2, 8)], ["Equipos que se culpan", V(-30, 14, -10)]].map(([n, p]) => {
+  const sintomas = [["Recomendaciones erróneas", V(30, 10, -8), I.error], ["Cifras contradictorias", V(30, 2, 8), I.alerta], ["Equipos que se culpan", V(-30, 14, -10), I.equipos]].map(([n, p, ic]) => {
     const b = bloque(new THREE.OctahedronGeometry(2.2));
     b.position.copy(p);
     escena.add(b);
     etiquetas.crear(n, b, V(0, -3.6, 0), enEscena);
+    conIcono(b, ic, { y: 3.8, tam: 2.8 });
     return b;
   });
 
@@ -81,23 +97,24 @@ export function crearRoles(etiquetas) {
   const escena = escenaBase();
   const enEscena = (s) => s.escena === "roles";
   const ROLES = {
-    DE: ["Data Engineer", V(-26, 5, 0)],
-    AE: ["Analytics Engineer", V(-8, 5, -12)],
-    BI: ["BI Developer", V(10, 5, -20)],
-    DA: ["Data Analyst", V(12, 5, -7)],
-    DS: ["Data Scientist", V(-6, 5, 4)],
-    AI: ["AI / LLM Engineer", V(-6, 5, 18)],
-    PE: ["Prompt Engineer", V(12, 5, 24)],
-    ML: ["MLOps / DevOps", V(16, 5, 10)],
-    PM: ["Product Manager", V(-4, 20, 2)]
+    DE: ["Data Engineer", V(-26, 5, 0), I.bd],
+    AE: ["Analytics Engineer", V(-8, 5, -12), I.capas],
+    BI: ["BI Developer", V(10, 5, -20), I.tablero],
+    DA: ["Data Analyst", V(12, 5, -7), I.analisis],
+    DS: ["Data Scientist", V(-6, 5, 4), I.ciencia],
+    AI: ["AI / LLM Engineer", V(-6, 5, 18), I.ia],
+    PE: ["Prompt Engineer", V(12, 5, 24), I.prompt],
+    ML: ["MLOps / DevOps", V(16, 5, 10), I.ops],
+    PM: ["Product Manager", V(-4, 20, 2), I.producto]
   };
   const nodos = {};
-  Object.entries(ROLES).forEach(([id, [nombre, p]]) => {
+  Object.entries(ROLES).forEach(([id, [nombre, p, ic]]) => {
     const b = bloque(new THREE.CylinderGeometry(2.4, 2.4, 1.6, 6));
     b.position.copy(p);
     escena.add(b);
     nodos[id] = b;
-    b.userData.e = etiquetas.crear(nombre, b, V(0, 2.8, 0), enEscena);
+    b.userData.e = etiquetas.crear(nombre, b, V(0, 2.6, 0), enEscena);
+    conIcono(b, ic, { tam: 3.6 });
   });
   // Traspasos de trabajo. Varios salen en paralelo del mismo rol.
   const ARISTAS = [["DE", "AE"], ["DE", "DS"], ["DE", "AI"], ["AE", "BI"], ["AE", "DA"], ["AE", "DS"], ["DS", "ML"], ["AI", "ML"], ["DS", "AI"], ["PE", "AI"], ["AI", "DE"]];
@@ -122,7 +139,8 @@ export function crearRoles(etiquetas) {
         b.userData.e.el.classList.toggle("activa", foco.includes(id));
       });
     },
-    actualizar(dt, t, { quieto }) {
+    actualizar(dt, t, { quieto, camara }) {
+      atenuarCercanos(Object.values(nodos).map((b) => b.userData.icono), camara);
       datos.actualizar(dt, quieto, (i) => {
         if (!foco.length) return "normal";
         const [a, b] = ARISTAS[i];
@@ -148,7 +166,8 @@ export function crearHerramientas(etiquetas) {
     b.lookAt(0, 9, 6);
     escena.add(b);
     tarjetas[id] = b;
-    b.userData.e = etiquetas.crear(nombre, b, V(0, 0, 0), (s) => enEscena(s) && !["json", "parquet"].includes(s.paso.foco));
+    b.userData.e = etiquetas.crear(nombre, b, V(0, -3.3, 0), (s) => enEscena(s) && !["json", "parquet"].includes(s.paso.foco));
+    conIcono(b, I[id], { placa: true, tam: 3.2, y: 0, z: 0.3 });
   });
 
   // La bóveda de secretos: un candado
@@ -185,6 +204,8 @@ export function crearHerramientas(etiquetas) {
     const l = contorno(g, COL.verde, 0.8); l.position.set(zona.x + c * 4, 3.6, zona.z); marcoParquet.add(l);
   });
   escena.add(marcoJson, marcoParquet);
+  conIcono(marcoJson.children[1], I.json, { y: 8.6, tam: 2.4 });
+  conIcono(marcoParquet.children[1], I.parquet, { y: 7.4, tam: 2.4 });
   const eJson = etiquetas.crear("JSON: un documento por registro", marcoJson.children[1], V(0, 5.6, 0), (s) => enEscena(s) && s.paso.foco === "json");
   const eParquet = etiquetas.crear("Parquet: una columna por campo", marcoParquet.children[1], V(2, 4.4, 0), (s) => enEscena(s) && s.paso.foco === "parquet");
 
@@ -197,6 +218,7 @@ export function crearHerramientas(etiquetas) {
         b.userData.e.el.classList.toggle("activa", f === id);
       });
       estadoBloque(cuerpo, f === "tokens" ? "foco" : "tenue");
+      candado.visible = !["json", "parquet"].includes(f);
       arco.material.color.set(f === "tokens" ? COL.verde : COL.marino);
       const formato = f === "json" || f === "parquet";
       celdas.forEach((m) => (m.visible = formato));
@@ -218,10 +240,12 @@ export function crearAgua(etiquetas) {
   const escena = escenaBase();
   const enEscena = (s) => s.escena === "agua";
   const piezas = {};
+  const ICONO_AGUA = { fuentes: I.bd, ingesta: I.ingesta, almacenamiento: I.almacen, transformacion: I.planta, consumo: I.consumo, orquestacion: I.flujo };
   const agregar = (id, nombre, obj, alto) => {
     escena.add(obj);
     piezas[id] = obj;
     obj.userData.e = etiquetas.crear(nombre, obj, V(0, alto, 0), enEscena);
+    conIcono(obj, ICONO_AGUA[id], { tam: 3.6 });
   };
   const montana = bloque(new THREE.ConeGeometry(7, 12, 6));
   montana.position.set(-38, 6, 0);
@@ -295,7 +319,8 @@ export function crearFuentes(etiquetas) {
   const centro = bloque(new THREE.CylinderGeometry(4, 4, 7, 32));
   centro.position.set(0, 3.5, 0);
   escena.add(centro);
-  etiquetas.crear("Pipeline", centro, V(0, 5.6, 0), enEscena);
+  centro.userData.e = etiquetas.crear("Pipeline", centro, V(0, 5.6, 0), enEscena);
+  conIcono(centro, I.flujo, { tam: 3 });
 
   // Cada interfaz trae datos con su estructura típica
   const GEOS = {
@@ -310,6 +335,7 @@ export function crearFuentes(etiquetas) {
     ["archivos", "Archivos y logs en la nube", "no"],
     ["dw", "Warehouses y lakes internos", "estructurado"]
   ];
+  const ICONO_FUENTE = { bd: I.mysql, api: I.api, stream: I.kafka, archivos: I.archivos, dw: I.almacen };
   const portales = {};
   const flujos = [];
   const N = 22;
@@ -322,6 +348,7 @@ export function crearFuentes(etiquetas) {
     escena.add(portal);
     portales[id] = portal;
     portal.userData.e = etiquetas.crear(nombre, portal, V(0, 4.6, 0), enEscena);
+    conIcono(portal, ICONO_FUENTE[id], { tam: 3.2 });
     const curva = curvaEntre(p, V(0, 5, 0), 4);
     const inst = new THREE.InstancedMesh(GEOS[tipo], new THREE.MeshBasicMaterial({ color: 0xffffff }), N);
     escena.add(inst);
@@ -396,13 +423,15 @@ export function crearMedallion(etiquetas) {
   lh.add(lh1, lh2); lh.position.set(-6, 0, -6); lh.userData.partes = [lh1, lh2];
   [["warehouse", "Data Warehouse", wh, 10], ["lake", "Data Lake", lk, 5], ["lakehouse", "Data Lakehouse", lh, 8.5]].forEach(([id, n, o, alto]) => {
     escena.add(o); piezas[id] = o; o.userData.e = etiquetas.crear(n, o, V(0, alto, 0), enEscena);
+    conIcono(o, { warehouse: I.almacen, lake: I.lago, lakehouse: I.casa }[id], { tam: 3 });
   });
   // Medallion: tres cámaras, cada una más refinada
   const CAPAS = [["bronce", "Bronce · crudo", 0x8a5a2b, 10], ["plata", "Plata · limpio", 0x9aa3b2, 22], ["oro", "Oro · negocio", 0xc9a23a, 34]];
   CAPAS.forEach(([id, n, c, x]) => {
     const b = bloque(new THREE.CylinderGeometry(4, 4, 8, 6), { color: c, opacidad: 0.55 });
     b.position.set(x, 4, 4); escena.add(b); piezas[id] = b;
-    b.userData.e = etiquetas.crear(n, b, V(0, 6, 0), enEscena);
+    b.userData.e = etiquetas.crear(n, b, V(0, 5, 0), enEscena);
+    conIcono(b, { bronce: I.crudo, plata: I.limpio, oro: I.oro }[id], { tam: 3 });
   });
   const tramos = [curvaEntre(V(-1, 3, 4), V(6, 3, 4), 2), curvaEntre(V(14, 3, 4), V(18, 3, 4), 2), curvaEntre(V(26, 3, 4), V(30, 3, 4), 2), curvaEntre(V(38, 3, 4), V(46, 5, 4), 2)];
   tramos.forEach((c) => escena.add(tubo(c, COL.marino, 0.35)));
@@ -459,11 +488,13 @@ export function crearDag(etiquetas) {
     tablero: ["Actualizar tablero", V(27, 5, -7), 4],
     modelo: ["Reentrenar modelo", V(27, 5, 7), 4]
   };
+  const ICONO_DAG = { mysql: I.mysql, api: I.api, bronce: I.crudo, plata: I.limpio, oro: I.oro, tablero: I.tablero, modelo: I.ia };
   const nodos = {};
   Object.entries(NODOS).forEach(([id, [n, p]]) => {
     const b = bloque(new THREE.BoxGeometry(5, 2.4, 3));
     b.position.copy(p); escena.add(b); nodos[id] = b;
-    b.userData.e = etiquetas.crear(n, b, V(0, 2.6, 0), enEscena);
+    b.userData.e = etiquetas.crear(n, b, V(0, 2.2, 0), enEscena);
+    conIcono(b, ICONO_DAG[id], { tam: 2.6 });
   });
   const ARISTAS = [["mysql", "bronce"], ["api", "bronce"], ["bronce", "plata"], ["plata", "oro"], ["oro", "tablero"], ["oro", "modelo"]];
   const flechas = ARISTAS.map(([a, b]) => {
@@ -485,7 +516,9 @@ export function crearDag(etiquetas) {
   // El marco de un Job de Lakeflow alrededor del grafo
   const job = contorno(new THREE.BoxGeometry(60, 10, 22), COL.verde, 0.8);
   job.position.set(2.5, 5, 0); job.visible = false; escena.add(job);
-  etiquetas.crear("Lakeflow Job", job, V(-26, 6, 0), (s) => enEscena(s) && s.paso.foco === "lakeflow");
+  etiquetas.crear("Lakeflow Job", job, V(0, -4.2, 11), (s) => enEscena(s) && s.paso.foco === "lakeflow");
+  const logoJob = conIcono(job, I.databricks, { y: 6.6, tam: 2.6 });
+  logoJob.position.set(0, -0.8, 11); logoJob.material.color.set(COL.verde);
 
   let f = null, reloj = 0;
   return {
