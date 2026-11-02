@@ -248,28 +248,28 @@ const pasos = [
     html: `<ul><li>Componentes, servicios en la nube y herramientas <b>conectados entre sí</b>.</li><li>Recolectan, almacenan, procesan y entregan información confiable a toda la organización.</li>
     <li>Antes: servidores físicos y centros de cómputo costosos.</li><li>Hoy: la <b>nube</b> ofrece servicios administrados y almacenamiento <b>elástico</b>.</li></ul><p class="fuente">Densmore (2021), cap. 2</p>`,
     mas: `<p>Para entenderla, pensemos en el sistema de agua potable de una ciudad: cada pieza tiene su equivalente en datos.</p>` },
-  { seccion: "infraestructura", escena: "agua", foco: "fuentes", cam: [-30, 12, 22], mira: [-38, 6, 0],
+  { seccion: "infraestructura", escena: "agua", foco: "fuentes", cam: [-27.2, 17.1, 29.7], mira: [-38, 9, 0],
     ojo: "Infraestructura · Manantiales", t: "Fuentes de datos",
     html: `<ul><li>La información nunca viene de un solo lugar.</li><li>Bases de datos operacionales, archivos en servidores, mensajería en tiempo real y APIs de terceros.</li>
     <li>Estructuras distintas: desde <b>tablas</b> hasta <b>JSON</b> o <b>texto libre</b>.</li><li><b>En el curso:</b> la API de Hugging Face. En el proyecto: la API de GDELT.</li></ul>`,
     mas: `<p>El agua nace en ríos y manantiales de la montaña, igual que los datos nacen en los sistemas de origen.</p>` },
-  { seccion: "infraestructura", escena: "agua", foco: "ingesta", cam: [-12, 10, 18], mira: [-20, 3, 0],
+  { seccion: "infraestructura", escena: "agua", foco: "ingesta", cam: [-9.2, 15.5, 24.3], mira: [-20, 6, 0],
     ojo: "Infraestructura · Bombeo", t: "Herramientas de ingesta",
     html: `<ul><li>Su único trabajo: <b>conectarse al origen</b> y depositar los datos de forma segura en el almacenamiento central.</li>
     <li><b>En el curso:</b> Google Colab. Desde un notebook se ejecuta la extracción y se envían los datos a Databricks.</li></ul>`,
     mas: `<p>Las estaciones de bombeo capturan el agua y la llevan a los tanques.</p>` },
-  { seccion: "infraestructura", escena: "agua", foco: "almacenamiento", cam: [8, 13, 22], mira: [0, 5, 0],
+  { seccion: "infraestructura", escena: "agua", foco: "almacenamiento", cam: [10.8, 18.8, 29.7], mira: [0, 8, 0],
     ojo: "Infraestructura · Tanques", t: "Almacenamiento centralizado",
     html: `<ul><li>Recibe y organiza <b>grandes volúmenes</b>.</li><li><b>Data warehouse:</b> estructurado y optimizado para consultas.</li>
     <li><b>Data lake:</b> más económico, guarda los archivos en su formato original.</li><li><b>Lakehouse:</b> combina ambos, con capas bronce, plata y oro.</li>
     <li><b>En el curso:</b> Databricks. Los tweets crudos llegan a Volumes y empiezan su recorrido por las capas.</li></ul>`,
     mas: `<p>Lo estudiamos a fondo en la sección de almacenamiento.</p>` },
-  { seccion: "infraestructura", escena: "agua", foco: "transformacion", cam: [26, 11, 20], mira: [18, 3.5, 0],
+  { seccion: "infraestructura", escena: "agua", foco: "transformacion", cam: [28.8, 16.6, 27], mira: [18, 6.5, 0],
     ojo: "Infraestructura · Planta de tratamiento", t: "Transformación y modelado",
     html: `<ul><li>Guardar el agua no basta: <b>hay que tratarla</b>.</li><li>Aplica reglas de negocio y construye modelos de datos limpios sobre las tablas.</li>
     <li><b>En el curso:</b> SQL en Databricks para quitar duplicados, nulos y ruido, y preparar el dataset etiquetado.</li><li>En las empresas lo reparten el Data Engineer y el Analytics Engineer.</li></ul><p class="fuente">Curry (2025)</p>`,
     mas: `<p>El dataset limpio servirá para entrenar el modelo de clasificación en Colab.</p>` },
-  { seccion: "infraestructura", escena: "agua", foco: "orquestacion", cam: [12, 22, 12], mira: [0, 10, -18],
+  { seccion: "infraestructura", escena: "agua", foco: "orquestacion", cam: [14.4, 27.4, 18], mira: [0, 13, -18],
     ojo: "Infraestructura · Centro de control", t: "Orquestación de flujos",
     html: `<ul><li>Con muchas fuentes y modelos, ejecutar todo <b>a mano</b> es imposible sin fallas.</li><li>El orquestador programa, monitorea y respeta las <b>dependencias</b> entre tareas.</li>
     <li>Las organiza en grafos dirigidos acíclicos: <b>DAG</b>.</li><li>No abre la válvula de distribución antes de tratar el agua: no limpia antes de cargar.</li>
@@ -313,41 +313,41 @@ const pasos = [
     mas: `<p>Densmore (2021, cap. 2). Los objetos grises que tiemblan son los datos sucios.</p>` },
 
   // ---- Almacenamiento y medallion
-  { seccion: "almacenamiento", escena: "medallion", foco: "paradigmas", cam: [-20, 16, 30], mira: [-20, 4, -2],
+  { seccion: "almacenamiento", escena: "medallion", foco: "paradigmas", cam: [-20, 20.4, 36.4], mira: [-20, 6, -2],
     ojo: "Paradigmas de almacenamiento", t: "¿Dónde se guardan los datos?",
     html: `<p>Una vez extraídos, ¿dónde se depositan y cómo se organizan?</p><ul><li>Dos repositorios tradicionales: <b>warehouse</b> y <b>lake</b>.</li><li>Uno moderno que los combina: el <b>lakehouse</b>.</li><li>Y una arquitectura por capas: <b>medallion</b>.</li></ul>`,
     mas: `<p>Densmore (2021, cap. 2); Databricks, arquitectura medallion.</p>` },
-  { seccion: "almacenamiento", escena: "medallion", foco: "warehouse", cam: [-28, 10, 14], mira: [-34, 4, -6],
+  { seccion: "almacenamiento", escena: "medallion", foco: "warehouse", cam: [-25, 17, 24], mira: [-34, 8, -6],
     ojo: "Paradigmas de almacenamiento", t: "Data Warehouse",
     html: `<ul><li>Base de datos <b>centralizada</b>.</li><li>Los datos de distintos sistemas se modelan para <b>análisis y reportes</b>.</li>
     <li>Información muy estructurada, limpia y optimizada.</li><li>Responde preguntas de negocio <b>rápido</b>.</li></ul><p class="fuente">Densmore (2021), cap. 2</p>`,
     mas: `<p>Como un almacén con estantes: todo ordenado, pero solo cabe lo que tiene forma de caja.</p>` },
-  { seccion: "almacenamiento", escena: "medallion", foco: "lake", cam: [-14, 10, 18], mira: [-20, 1, 4],
+  { seccion: "almacenamiento", escena: "medallion", foco: "lake", cam: [-11, 18.5, 25], mira: [-20, 5, 4],
     ojo: "Paradigmas de almacenamiento", t: "Data Lake",
     html: `<ul><li>Depósito <b>masivo</b>: los datos se guardan en su <b>forma original</b>.</li><li>Sin la estructura rígida ni la optimización de consulta del warehouse.</li>
     <li>Texto plano, JSON, imágenes, archivos comprimidos y extractos relacionales.</li><li>A muy <b>bajo costo</b>.</li></ul><p class="fuente">Densmore (2021), cap. 2</p>`,
     mas: `<p>Como un lago: entra de todo, con cualquier forma.</p>` },
-  { seccion: "almacenamiento", escena: "medallion", foco: "lakehouse", cam: [0, 10, 14], mira: [-6, 3, -6],
+  { seccion: "almacenamiento", escena: "medallion", foco: "lakehouse", cam: [3, 17.5, 24], mira: [-6, 7, -6],
     ojo: "Paradigmas de almacenamiento", t: "Data Lakehouse",
     html: `<ul><li>La <b>convergencia</b> de ambos mundos.</li><li>Del lake: flexibilidad, escalabilidad y bajo costo.</li>
     <li>Del warehouse: transacciones confiables, gobernanza y consultas de alto rendimiento.</li><li>Databricks es un lakehouse.</li></ul><p class="fuente">Databricks, arquitectura medallion</p>`,
     mas: `<p>El lago, con estantes encima para lo que necesita orden.</p>` },
-  { seccion: "almacenamiento", escena: "medallion", foco: "medallion", cam: [22, 16, 32], mira: [22, 4, 4],
+  { seccion: "almacenamiento", escena: "medallion", foco: "medallion", cam: [22, 20.4, 37.6], mira: [22, 6, 4],
     ojo: "Arquitectura medallion", t: "Tres capas, multi-salto",
     html: `<ul><li>Patrón de diseño de Databricks para organizar un lakehouse.</li><li>También se llama arquitectura <b>multi-salto</b> (<i>multi-hop</i>).</li>
     <li>Mejora la estructura y la <b>calidad</b> de los datos de forma incremental.</li><li>Los datos fluyen por tres capas sucesivas: <b>bronce, plata y oro</b>.</li></ul>`,
     mas: `<p>Databricks, arquitectura medallion.</p>` },
-  { seccion: "almacenamiento", escena: "medallion", foco: "bronce", cam: [15, 9, 18], mira: [10, 4, 4],
+  { seccion: "almacenamiento", escena: "medallion", foco: "bronce", cam: [17.5, 15.5, 25], mira: [10, 8, 4],
     ojo: "Arquitectura medallion", t: "Capa bronce",
     html: `<ul><li>Punto de entrada de los <b>datos crudos</b>.</li><li>Preserva el estado original, sin limpiezas ni validaciones complejas.</li>
     <li>Crece con inserciones <b>incrementales</b>.</li><li>Fuente única de verdad <b>inmutable</b>: permite auditar o reprocesar si cambian las reglas.</li><li><b>Usuarios:</b> ingenieros de datos y operaciones.</li></ul>`,
     mas: `<p>En el curso: la tabla <code>bronze_tweets</code> del Laboratorio 1.</p>` },
-  { seccion: "almacenamiento", escena: "medallion", foco: "plata", cam: [27, 9, 18], mira: [22, 4, 4],
+  { seccion: "almacenamiento", escena: "medallion", foco: "plata", cam: [29.5, 15.5, 25], mira: [22, 8, 4],
     ojo: "Arquitectura medallion", t: "Capa plata",
     html: `<ul><li>Limpieza, filtrado, <b>deduplicación</b>, conformación y normalización.</li><li>Corrige registros corruptos, gestiona nulos y valida esquemas.</li>
     <li>Datos validados y enriquecidos, todavía sin agregar.</li><li><b>Usuarios:</b> analistas y científicos de datos que exploran sin tropezar con inconsistencias.</li></ul>`,
     mas: `<p>En el curso: la Clase 3.</p>` },
-  { seccion: "almacenamiento", escena: "medallion", foco: "oro", cam: [39, 9, 18], mira: [34, 4, 4],
+  { seccion: "almacenamiento", escena: "medallion", foco: "oro", cam: [41.5, 15.5, 25], mira: [34, 8, 4],
     ojo: "Arquitectura medallion", t: "Capa oro",
     html: `<ul><li>Datos <b>refinados, modelados y agregados</b> para necesidades de negocio.</li><li>Esquemas dimensionales, agregaciones temporales y métricas clave.</li>
     <li>Alimenta tableros, reportes ejecutivos y <b>modelos de IA</b> en producción.</li><li><b>Usuarios:</b> ejecutivos, analistas de negocio y desarrolladores de BI.</li></ul>`,
