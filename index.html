@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Deep Learning y Big Data · Presentaciones</title>
+  <meta name="description" content="Presentaciones 3D del curso Deep Learning y Big Data con Python (SINT-646), Universidad CENFOTEC.">
+</head>
+<body>
+  <canvas id="escena" aria-label="Escena 3D del curso"></canvas>
+
+  <header class="barra">
+    <div class="marca">
+      <img src="./marca/logo-blanco.png" alt="Universidad CENFOTEC">
+      <div class="curso">Deep Learning y Big Data con Python<span>SINT-646 · Escuela de Sistemas Inteligentes</span></div>
+    </div>
+    <div class="acciones">
+      <button class="boton" id="btn-liviano" type="button" aria-pressed="false">Modo liviano</button>
+      <button class="boton" id="btn-menu" type="button" hidden>← Clases</button>
+    </div>
+  </header>
+
+  <section id="vista-menu" class="capa">
+    <div class="menu-texto">
+      <div class="ojo">El viaje del dato</div>
+      <h1>De un tweet crudo<br>a una <em>predicción</em></h1>
+      <p>Ocho estaciones, una por clase. Cada una se enciende cuando se libera su contenido.</p>
+    </div>
+    <ol class="estaciones" id="estaciones"></ol>
+  </section>
+
+  <section id="vista-clase" class="capa" hidden>
+    <aside class="panel" aria-live="polite">
+      <div class="panel-cab">
+        <label class="indice"><span class="sr">Sección</span><select id="p-seccion"></select></label>
+        <div class="contador" id="p-contador"></div>
+      </div>
+      <div class="progreso" id="p-progreso"></div>
+      <div class="panel-cuerpo" id="p-cuerpo"></div>
+      <div class="nav">
+        <button class="boton" id="btn-ant" type="button">← Anterior</button>
+        <button class="boton siguiente" id="btn-sig" type="button">Siguiente →</button>
+      </div>
+    </aside>
+    <div class="pista">Usa <kbd>←</kbd> <kbd>→</kbd> para avanzar · <kbd>Esc</kbd> vuelve al menú</div>
+  </section>
+
+  <div id="etiquetas"></div>
+  <div class="cortina" id="cortina"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

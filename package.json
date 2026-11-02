@@ -1,0 +1,20 @@
+{
+  "name": "dlbd-presentaciones",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/barlow-semi-condensed": "5.1.1",
+    "@fontsource/figtree": "5.2.10",
+    "gsap": "3.12.5",
+    "three": "0.160.0"
+  },
+  "devDependencies": {
+    "vite": "5.4.21"
+  }
+}
