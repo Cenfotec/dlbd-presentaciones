@@ -206,6 +206,7 @@ function proyectarEstaciones() {
     el.style.visibility = v.z < 1 && estado.vista === "menu" ? "visible" : "hidden";
   });
 }
+let corrimiento = 0;
 function animar() {
   requestAnimationFrame(animar);
   if (!mundo) return;
@@ -217,9 +218,14 @@ function animar() {
     mundo.camara.position.x += ((CAM_MENU.cam[0] + parallax.x * 8) - mundo.camara.position.x) * 0.02;
     mundo.camara.position.y += ((CAM_MENU.cam[1] + parallax.y * 4) - mundo.camara.position.y) * 0.02;
   }
+  // En una clase, el panel ocupa la derecha: se corre el centro óptico hacia el espacio libre.
+  const panel = estado.vista === "clase" && innerWidth > 760 ? $(".panel").getBoundingClientRect() : null;
+  const meta = panel ? (innerWidth - panel.left) / 2 : 0;
+  corrimiento += (meta - corrimiento) * Math.min(1, dt * 4);
+  mundo.correr(corrimiento);
   mundo.render();
   proyectarEstaciones();
-  etiquetas.proyectar(mundo.camara, { vista: estado.vista, escena: estado.escena, paso: estado.paso });
+  etiquetas.proyectar(mundo.camara, { vista: estado.vista, escena: estado.escena, paso: estado.paso }, panel ? panel.left - 12 : innerWidth);
 }
 animar();
 leerHash();

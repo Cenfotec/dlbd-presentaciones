@@ -17,7 +17,9 @@ export function crearMundo(canvas) {
   }
   const camara = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 1500);
   const mira = new THREE.Vector3();
-  const composer = new EffectComposer(renderer);
+  // Render target con multisampling: sin esto el posprocesado pierde el antialiasing y los bordes se ven pixeleados.
+  const objetivo = new THREE.WebGLRenderTarget(innerWidth, innerHeight, { samples: 4, type: THREE.HalfFloatType });
+  const composer = new EffectComposer(renderer, objetivo);
   const pasada = new RenderPass(new THREE.Scene(), camara);
   const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), BLOOM.fuerza, BLOOM.radio, BLOOM.umbral);
   composer.addPass(pasada);
@@ -30,9 +32,16 @@ export function crearMundo(canvas) {
     ajustar() {
       camara.aspect = innerWidth / innerHeight;
       camara.updateProjectionMatrix();
-      renderer.setPixelRatio(this.liviano ? 1 : Math.min(devicePixelRatio, 2));
+      const ratio = this.liviano ? 1 : Math.min(devicePixelRatio, 2);
+      renderer.setPixelRatio(ratio);
       renderer.setSize(innerWidth, innerHeight, false);
+      // El composer guarda su propia densidad de píxeles: hay que actualizarla o se ve pixeleado en pantallas HiDPI.
+      composer.setPixelRatio(ratio);
       composer.setSize(innerWidth, innerHeight);
+    },
+    correr(px) {
+      if (Math.abs(px) < 0.5) { if (camara.view) { camara.clearViewOffset(); } return; }
+      camara.setViewOffset(innerWidth, innerHeight, px, 0, innerWidth, innerHeight);
     },
     render() {
       camara.lookAt(mira);
