@@ -2,7 +2,7 @@
 // "publicada": true la muestra encendida. "desde": "AAAA-MM-DD" la enciende sola a partir de esa fecha (hora de Costa Rica).
 export const CLASES = [
   { n: 1, nombre: "Fundamentos de Big Data", publicada: true },
-  { n: 2, nombre: "Extracción y carga" },
+  { n: 2, nombre: "Extracción y carga", publicada: true },
   { n: 3, nombre: "Transformación y calidad" },
   { n: 4, nombre: "Análisis exploratorio" },
   { n: 5, nombre: "Introducción al Deep Learning" },
