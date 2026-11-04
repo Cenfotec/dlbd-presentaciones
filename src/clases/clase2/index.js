@@ -118,26 +118,26 @@ const pasos = [
     html: `<ul><li>Un <b>producto de datos</b> es una aplicación que usa datos para funcionar.</li><li>Recomendaciones de video, un buscador personalizado o <b>análisis de sentimiento de reseñas</b>.</li>
     <li>Empieza como ELT; después de cargar vienen los pasos para <b>construir y actualizar el modelo</b>.</li></ul><p class="fuente">Densmore (2021), cap. 3</p>`,
     mas: `<p>El análisis de sentimiento es muy parecido a lo que haremos con los tweets.</p>` },
-  { seccion: "ml", ...CICLO, foco: "ingesta", cam: [0, 22, 36], mira: [0, 4, 10],
+  { seccion: "ml", ...CICLO, foco: "ingesta", cam: [0, 20, 10], mira: [0, 6, -16],
     ojo: "Paso 1 de 5", t: "Ingesta versionada",
     html: `<ul><li>La misma lógica de extraer y cargar.</li><li>Con una consideración extra: los datos quedan <b>versionados</b>.</li>
     <li>El modelo puede referirse a un conjunto de datos <b>específico</b> para entrenar o validar.</li></ul><p class="fuente">Densmore (2021), cap. 3</p>`,
     mas: `<p>Como la edición de un libro de texto: "aprendí con el libro" no dice nada; "aprendí con la tercera edición de 2025", sí.</p>` },
-  { seccion: "ml", ...CICLO, foco: "preproceso", cam: [-26, 22, 20], mira: [-15, 4, 4],
+  { seccion: "ml", ...CICLO, foco: "preproceso", cam: [-17, 20, 21], mira: [-15.2, 6, -4.9],
     ojo: "Paso 2 de 5", t: "Preprocesamiento",
     html: `<ul><li>Los datos que llegan casi nunca están listos para un modelo.</li><li>Se limpian y se preparan.</li>
     <li>El texto se divide en piezas que el modelo entienda; los valores se convierten a números y se normalizan.</li></ul><p class="fuente">Densmore (2021), cap. 3</p>`,
     mas: `<p>Cómo se hace con texto lo veremos en detalle en la Clase 5.</p>` },
-  { seccion: "ml", ...CICLO, foco: "entreno", cam: [-18, 22, -26], mira: [-9, 4, -13],
+  { seccion: "ml", ...CICLO, foco: "entreno", cam: [-10.5, 20, 38], mira: [-9.4, 6, 12.9],
     ojo: "Paso 3 de 5", t: "Entrenamiento",
     html: `<ul><li>Cuando llegan datos nuevos y preprocesados, los modelos se <b>vuelven a entrenar</b>.</li></ul><p class="fuente">Densmore (2021), cap. 3</p>`,
     mas: `<p>Lo haremos en las Clases 5 y 6, en Colab con GPU.</p>` },
-  { seccion: "ml", ...CICLO, foco: "despliegue", cam: [18, 22, -26], mira: [9, 4, -13],
+  { seccion: "ml", ...CICLO, foco: "despliegue", cam: [10.5, 20, 38], mira: [9.4, 6, 12.9],
     ojo: "Paso 4 de 5", t: "Despliegue",
     html: `<ul><li>Puede ser lo más difícil: pasar de un experimento a un producto real.</li><li>Se versionan los datos <b>y también los modelos</b>.</li>
     <li>Muchas veces el modelo se consulta con una <b>API REST</b>, un punto de acceso por versión.</li><li>Requiere a data scientists, ML engineers y data engineers trabajando juntos.</li></ul><p class="fuente">Densmore (2021), cap. 3</p>`,
     mas: `<p>Un pipeline bien diseñado es lo que mantiene unidas las piezas.</p>` },
-  { seccion: "ml", ...CICLO, foco: "retro", cam: [26, 22, 20], mira: [15, 4, 4],
+  { seccion: "ml", ...CICLO, foco: "retro", cam: [17, 20, 21], mira: [15.2, 6, -4.9],
     ojo: "Paso 5 de 5", t: "Retroalimentación",
     html: `<ul><li>Se recoge cómo se comporta el modelo en el mundo real: qué se recomendó y en qué hizo clic el usuario.</li>
     <li>Esos datos <b>vuelven a ingerirse</b> para futuras versiones del modelo.</li><li>También sirven a los analistas para tableros sobre su efectividad.</li></ul><p class="fuente">Densmore (2021), cap. 3</p>`,
