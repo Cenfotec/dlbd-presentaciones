@@ -14,8 +14,9 @@ import { crearMundo } from "./motor/mundo.js";
 import { crearCurso } from "./motor/curso.js";
 import { Etiquetas, reducido } from "./motor/util.js";
 import clase1 from "./clases/clase1/index.js";
+import clase2 from "./clases/clase2/index.js";
 
-const MODULOS = { 1: clase1 };
+const MODULOS = { 1: clase1, 2: clase2 };
 const $ = (s) => document.querySelector(s);
 const DUR = reducido ? 0.01 : 1;
 const CAM_MENU = { cam: [0, 58, 104], mira: [0, -8, -4] };
